@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Time from "../components/Time/Time";
+import Calendar from "../components/Calendar/Calendar";
 import Greeting from "../components/Greeting/Greeting";
 import Weather from "../components/Weather/Weather";
 import Background from "../components/Background/Background";
@@ -9,7 +10,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentTemp: ""
+      currentWeather: {
+        temp: "",
+        windSpeed: "",
+        precipitation: "",
+        weatherSymbol: ""
+      }
     };
   }
 
@@ -20,7 +26,12 @@ class App extends Component {
       .then(response => response.json())
       .then(weather =>
         this.setState({
-          currentTemp: weather.timeSeries[3].parameters[1].values[0]
+          currentWeather: {
+            temp: weather.timeSeries[0].parameters[11].values[0],
+            windSpeed: weather.timeSeries[0].parameters[14].values[0],
+            precipitation: weather.timeSeries[0].parameters[1].values[0],
+            weatherSymbol: weather.timeSeries[0].parameters[18].values[0]
+          }
         })
       );
   }
@@ -29,11 +40,12 @@ class App extends Component {
     return (
       <div>
         <Background>
-          <Weather temp={this.state.currentTemp} />
+          <Weather weather={this.state.currentWeather} />
           <div className="tc middle">
             <Time />
             <Greeting />
           </div>
+          <Calendar />
         </Background>
       </div>
     );
