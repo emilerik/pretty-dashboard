@@ -1,10 +1,15 @@
 import React from "react";
 import "./Weather.css";
 
+const getWeatherSymbol = WSNum => {
+  const weatherSymbols = ["☼", "🌤", "⛅", "🌥", "☁", "☁", "🌫", "🌦", "🌦"];
+  return weatherSymbols[WSNum];
+};
+
 // const Weather = ({ temp, windSpeed, precipitation, weatherSymbol }) => {
 const Weather = ({ weather }) => {
   console.log(weather);
-  const { temp, windSpeed, precipitation } = weather;
+  const { temp, windSpeed, precipitation, weatherSymbol } = weather;
   let rainStatus = "";
   switch (precipitation) {
     case 1:
@@ -36,6 +41,7 @@ const Weather = ({ weather }) => {
       {/* <p className="b pa2 ma0">{windSpeed} m/s</p> */}
       {rainStatus ? <p className="pa2 ma0">{rainStatus}</p> : null}
       {/* <h3>weatherSymbol: {weatherSymbol}</h3> */}
+      <p className="f3 pa2 ma0">{getWeatherSymbol(weatherSymbol)}</p>
     </div>
   );
 };

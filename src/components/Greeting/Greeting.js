@@ -1,9 +1,10 @@
 import React from "react";
 import "./Greeting.css";
 
+console.log(process.env.foo);
 const currentTime = new Date();
 const Greeting = () => {
-  const hour = currentTime.hours;
+  const hour = currentTime.getHours();
   if (hour < 10) {
     return <h1>Godmorgon, Emil</h1>;
   } else if (hour < 14) {
