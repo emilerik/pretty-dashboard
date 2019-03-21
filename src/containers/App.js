@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Time from "../components/Time/Time";
-import Calendar from "../components/Calendar/Calendar";
+import GenerateBG from "../components/GenerateBG/GenerateBG";
 import Greeting from "../components/Greeting/Greeting";
 import Weather from "../components/Weather/Weather";
 import Background from "../components/Background/Background";
@@ -15,9 +15,23 @@ class App extends Component {
         windSpeed: "",
         precipitation: "",
         weatherSymbol: ""
-      }
+      },
+      backgroundUrl: "https://source.unsplash.com/1600x900/?wallpaper",
+      urlCounter: 1
     };
   }
+
+  onGenerateBG = () => {
+    this.state.urlCounter === 1
+      ? this.setState({
+          backgroundUrl: "https://source.unsplash.com/1600x900/?wallpaper",
+          urlCounter: 2
+        })
+      : this.setState({
+          backgroundUrl: "https://source.unsplash.com/1600x900/?hdwallpaper",
+          urlCounter: 1
+        });
+  };
 
   componentDidMount() {
     fetch(
@@ -39,13 +53,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Background>
+        <Background backgroundUrl={this.state.backgroundUrl}>
           <Weather weather={this.state.currentWeather} />
           <div className="tc middle">
             <Time />
             <Greeting />
           </div>
-          <Calendar />
+          <GenerateBG onGenerateBG={this.onGenerateBG} />
         </Background>
       </div>
     );

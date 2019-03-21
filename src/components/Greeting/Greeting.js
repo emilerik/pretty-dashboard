@@ -1,7 +1,6 @@
 import React from "react";
 import "./Greeting.css";
 
-console.log(process.env.foo);
 const currentTime = new Date();
 const Greeting = () => {
   const hour = currentTime.getHours();

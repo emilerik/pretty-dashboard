@@ -8,7 +8,6 @@ const getWeatherSymbol = WSNum => {
 
 // const Weather = ({ temp, windSpeed, precipitation, weatherSymbol }) => {
 const Weather = ({ weather }) => {
-  console.log(weather);
   const { temp, windSpeed, precipitation, weatherSymbol } = weather;
   let rainStatus = "";
   switch (precipitation) {
@@ -36,12 +35,11 @@ const Weather = ({ weather }) => {
   return (
     <div className="helvetica tc ba br4 temp pa1 ma3 f3 white">
       <p className="b pa2 ma0">
-        {temp}°C | {windSpeed} m/s
+        {temp}°C{getWeatherSymbol(weatherSymbol)} | {windSpeed} m/s
       </p>
       {/* <p className="b pa2 ma0">{windSpeed} m/s</p> */}
       {rainStatus ? <p className="pa2 ma0">{rainStatus}</p> : null}
       {/* <h3>weatherSymbol: {weatherSymbol}</h3> */}
-      <p className="f3 pa2 ma0">{getWeatherSymbol(weatherSymbol)}</p>
     </div>
   );
 };
