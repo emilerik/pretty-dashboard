@@ -4,6 +4,7 @@ import GenerateBG from "../components/GenerateBG/GenerateBG";
 import Greeting from "../components/Greeting/Greeting";
 import Weather from "../components/Weather/Weather";
 import Background from "../components/Background/Background";
+import { API_key } from "../API.js";
 import "./App.css";
 
 class App extends Component {
@@ -16,21 +17,25 @@ class App extends Component {
         precipitation: "",
         weatherSymbol: ""
       },
+      // backgroundUrl: "",
       backgroundUrl: "https://source.unsplash.com/1600x900/?wallpaper",
       urlCounter: 1
     };
   }
 
   onGenerateBG = () => {
-    this.state.urlCounter === 1
-      ? this.setState({
-          backgroundUrl: "https://source.unsplash.com/1600x900/?wallpaper",
-          urlCounter: 2
-        })
-      : this.setState({
-          backgroundUrl: "https://source.unsplash.com/1600x900/?hdwallpaper",
-          urlCounter: 1
-        });
+    fetch(
+      "https://api.unsplash.com/photos/random/?query=wallpaper&orientation=landscape&featured",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Client-ID " + API_key
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(data => this.setState({ backgroundUrl: data.urls.regular }))
+      .catch(err => console.log(err));
   };
 
   componentDidMount() {
@@ -48,6 +53,7 @@ class App extends Component {
           }
         })
       );
+    this.onGenerateBG();
   }
 
   render() {
