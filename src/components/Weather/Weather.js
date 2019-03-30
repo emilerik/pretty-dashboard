@@ -33,12 +33,15 @@ const Weather = ({ weather }) => {
       break;
   }
   return (
-    <div className="helvetica tc ba br4 temp pa1 ma3 f3 white">
+    <div
+      className="dib helvetica tc br4 temp pa1 ma3 f3 white"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+    >
       <p className="b pa2 ma0">
-        {temp}°C{getWeatherSymbol(weatherSymbol)} | {windSpeed} m/s
+        {temp}°C &nbsp; {getWeatherSymbol(weatherSymbol)} &nbsp; {windSpeed} m/s
       </p>
       {/* <p className="b pa2 ma0">{windSpeed} m/s</p> */}
-      {rainStatus ? <p className="pa2 ma0">{rainStatus}</p> : null}
+      {/* {rainStatus ? <p className="pa2 ma0">{rainStatus}</p> : null} */}
       {/* <h3>weatherSymbol: {weatherSymbol}</h3> */}
     </div>
   );

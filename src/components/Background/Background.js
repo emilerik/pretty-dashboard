@@ -10,6 +10,7 @@ const Background = props => {
   let styles = {
     height: "100vh",
     backgroundImage: "url(" + backgroundUrl + ")",
+    // backgroundImage: `url(${background})`,
     backgroundSize: "cover",
     overflow: "hidden"
   };

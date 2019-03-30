@@ -1,5 +1,5 @@
 h1 {
   color: white;
-  font-size: 3rem;
+  font-size: calc(25px + 1.5vw);
   margin: 0 auto;
 }

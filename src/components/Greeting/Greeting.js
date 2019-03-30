@@ -11,7 +11,7 @@ const Greeting = () => {
   } else if (hour < 18) {
     return <h1>God middag, Emil</h1>;
   } else {
-    return <h1>God kväll, Emil</h1>;
+    return <h1>Godkväll, Emil</h1>;
   }
 };
 

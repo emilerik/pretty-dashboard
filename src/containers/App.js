@@ -4,6 +4,7 @@ import GenerateBG from "../components/GenerateBG/GenerateBG";
 import Greeting from "../components/Greeting/Greeting";
 import Weather from "../components/Weather/Weather";
 import Background from "../components/Background/Background";
+import GearBtn from "../components/GearBtn/GearBtn";
 import { API_key } from "../API.js";
 import "./App.css";
 
@@ -19,7 +20,9 @@ class App extends Component {
       },
       // backgroundUrl: "",
       backgroundUrl: "https://source.unsplash.com/1600x900/?wallpaper",
-      urlCounter: 1
+      lat: "58.412826",
+      long: "15.598989",
+      positionErr: false
     };
   }
 
@@ -38,9 +41,15 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  componentDidMount() {
+  onPositionChange = (lat, long) => {
+    this.setState({ lat: lat, long: long });
+    this.updateWeatherData();
+  };
+
+  updateWeatherData = () => {
+    const { lat, long } = this.state;
     fetch(
-      "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/15.598989/lat/58.412826/data.json"
+      `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${long}/lat/${lat}/data.json`
     )
       .then(response => response.json())
       .then(weather =>
@@ -52,7 +61,13 @@ class App extends Component {
             weatherSymbol: weather.timeSeries[0].parameters[18].values[0]
           }
         })
-      );
+      )
+      .catch(err => this.setState({ positionErr: true }));
+    console.log(this.state);
+  };
+
+  componentDidMount() {
+    this.updateWeatherData();
     this.onGenerateBG();
   }
 
@@ -60,12 +75,20 @@ class App extends Component {
     return (
       <div>
         <Background backgroundUrl={this.state.backgroundUrl}>
-          <Weather weather={this.state.currentWeather} />
-          <div className="tc middle">
+          <div className="w-25 tl left">
+            <Weather weather={this.state.currentWeather} />
+          </div>
+          <div className="w-50 tc middle">
             <Time />
             <Greeting />
           </div>
-          <GenerateBG onGenerateBG={this.onGenerateBG} />
+          <div className="w-25 tr right">
+            <GearBtn
+              positionErr={this.state.positionErr}
+              onPositionChange={this.onPositionChange}
+            />
+            <GenerateBG onGenerateBG={this.onGenerateBG} />
+          </div>
         </Background>
       </div>
     );
