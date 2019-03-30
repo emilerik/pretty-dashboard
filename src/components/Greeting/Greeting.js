@@ -2,16 +2,16 @@ import React from "react";
 import "./Greeting.css";
 
 const currentTime = new Date();
-const Greeting = () => {
+const Greeting = ({ name }) => {
   const hour = currentTime.getHours();
-  if (hour < 10) {
-    return <h1>Godmorgon, Emil</h1>;
+  if (hour > 18 || hour < 4) {
+    return <h1>Godkväll, {name}</h1>;
+  } else if (hour < 10) {
+    return <h1>Godmorgon, {name}</h1>;
   } else if (hour < 14) {
-    return <h1>God dag, Emil</h1>;
-  } else if (hour < 18) {
-    return <h1>God middag, Emil</h1>;
+    return <h1>God dag, {name}</h1>;
   } else {
-    return <h1>Godkväll, Emil</h1>;
+    return <h1>God middag, {name}</h1>;
   }
 };
 

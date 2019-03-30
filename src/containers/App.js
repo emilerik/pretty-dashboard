@@ -22,7 +22,8 @@ class App extends Component {
       backgroundUrl: "https://source.unsplash.com/1600x900/?wallpaper",
       lat: "58.412826",
       long: "15.598989",
-      positionErr: false
+      positionErr: false,
+      name: "Emil"
     };
   }
 
@@ -38,16 +39,22 @@ class App extends Component {
     )
       .then(response => response.json())
       .then(data => this.setState({ backgroundUrl: data.urls.regular }))
-      .catch(err => console.log(err));
+      .catch(err => console.log("There was an error"));
   };
 
-  onPositionChange = (lat, long) => {
-    this.setState({ lat: lat, long: long });
-    this.updateWeatherData();
+  onSubmitUpdate = (lat, long, name) => {
+    if (lat && long) {
+      this.setState({ lat: lat, long: long });
+      this.updateWeatherData(lat, long);
+      if (name) {
+        this.setState({ name: name });
+      }
+    } else if (name) {
+      this.setState({ name: name });
+    }
   };
 
-  updateWeatherData = () => {
-    const { lat, long } = this.state;
+  updateWeatherData = (lat, long) => {
     fetch(
       `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${long}/lat/${lat}/data.json`
     )
@@ -59,15 +66,15 @@ class App extends Component {
             windSpeed: weather.timeSeries[0].parameters[14].values[0],
             precipitation: weather.timeSeries[0].parameters[1].values[0],
             weatherSymbol: weather.timeSeries[0].parameters[18].values[0]
-          }
+          },
+          positionErr: false
         })
       )
       .catch(err => this.setState({ positionErr: true }));
-    console.log(this.state);
   };
 
   componentDidMount() {
-    this.updateWeatherData();
+    this.updateWeatherData("58.412826", "15.598989");
     this.onGenerateBG();
   }
 
@@ -80,12 +87,12 @@ class App extends Component {
           </div>
           <div className="w-50 tc middle">
             <Time />
-            <Greeting />
+            <Greeting name={this.state.name} />
           </div>
           <div className="w-25 tr right">
             <GearBtn
               positionErr={this.state.positionErr}
-              onPositionChange={this.onPositionChange}
+              onSubmitUpdate={this.onSubmitUpdate}
             />
             <GenerateBG onGenerateBG={this.onGenerateBG} />
           </div>

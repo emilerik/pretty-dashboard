@@ -5,10 +5,15 @@ class GearBtn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       latitude: "",
       longitude: ""
     };
   }
+
+  onNameChange = event => {
+    this.setState({ name: event.target.value });
+  };
 
   onLatChange = event => {
     this.setState({ latitude: event.target.value });
@@ -18,9 +23,8 @@ class GearBtn extends React.Component {
     this.setState({ longitude: event.target.value });
   };
 
-  onSubmitPosition = () => {};
   render() {
-    const { onPositionChange, positionErr } = this.props;
+    const { onSubmitUpdate, positionErr } = this.props;
     return (
       <div className="dropdown pt2 pr3 mr2 mt2 ma0">
         <p
@@ -33,11 +37,23 @@ class GearBtn extends React.Component {
           <IoMdSettings />
         </p>
         <div
-          className="dropdown-menu dropdown-menu-right ma0 w-70"
+          className="dropdown-menu dropdown-menu-right ma0 w-70 ba b--white"
           aria-labelledby="dropdownMenuButton"
           style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
         >
-          <p className="white ph3 mb1 f5">Enter your position:</p>
+          <p className="white ph3 mb1 f5">Enter your name</p>
+          <div className="ph3 pv1">
+            <input
+              onChange={this.onNameChange}
+              style={{ backgroundColor: "rbga(255,255,255,0.1)" }}
+              className="pa1 ba b--transparent br2 bw1 w-100 input-reset"
+              placeholder="name..."
+              type="text"
+              name="name"
+              id="name"
+            />
+          </div>
+          <p className="white ph3 mb1 f5">Enter your position</p>
           <div className="ph3 pv1">
             <input
               onChange={this.onLatChange}
@@ -61,9 +77,13 @@ class GearBtn extends React.Component {
           </div>
           <div className="ph3 pv1">
             <input
-              onClick={() =>
-                onPositionChange(this.state.latitude, this.state.longitude)
-              }
+              onClick={() => {
+                onSubmitUpdate(
+                  this.state.latitude,
+                  this.state.longitude,
+                  this.state.name
+                );
+              }}
               className="b ph3 pv2 input-reset ba b--white br2 bg-transparent pointer f6 dib white w-100"
               type="submit"
               value="Update"

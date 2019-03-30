@@ -21,9 +21,11 @@ class Time extends React.Component {
   render() {
     const { time } = this.state;
     const minutes = time.getMinutes();
+    const hours = time.getHours();
     return (
       <h1 className="time">
-        {time.getHours()}:{minutes < 10 ? "0" + minutes : minutes}{" "}
+        {hours < 10 ? "0" + hours : hours}:
+        {minutes < 10 ? "0" + minutes : minutes}{" "}
         {/* Adds a zero in front of single minutes */}
       </h1>
     );
