@@ -4,7 +4,7 @@ import GenerateBG from "../components/GenerateBG/GenerateBG";
 import Greeting from "../components/Greeting/Greeting";
 import Weather from "../components/Weather/Weather";
 import Background from "../components/Background/Background";
-import GearBtn from "../components/GearBtn/GearBtn";
+import Settings from "../components/Settings/Settings";
 import { API_key } from "../API.js";
 import "./App.css";
 
@@ -90,7 +90,7 @@ class App extends Component {
             <Greeting name={this.state.name} />
           </div>
           <div className="w-25 tr right">
-            <GearBtn
+            <Settings
               positionErr={this.state.positionErr}
               onSubmitUpdate={this.onSubmitUpdate}
             />

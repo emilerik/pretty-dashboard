@@ -1,7 +1,7 @@
 import React from "react";
 import { IoMdSettings } from "react-icons/io";
 
-class GearBtn extends React.Component {
+class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +47,7 @@ class GearBtn extends React.Component {
               onChange={this.onNameChange}
               style={{ backgroundColor: "rbga(255,255,255,0.1)" }}
               className="pa1 ba b--transparent br2 bw1 w-100 input-reset"
-              placeholder="name..."
+              placeholder=""
               type="text"
               name="name"
               id="name"
@@ -98,4 +98,4 @@ class GearBtn extends React.Component {
   }
 }
 
-export default GearBtn;
+export default Settings;

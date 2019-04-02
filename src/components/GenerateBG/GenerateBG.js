@@ -4,7 +4,7 @@ import "./GenerateBG.css";
 
 const GenerateBG = ({ onGenerateBG }) => {
   return (
-    <div className="generateBGBtn pa2 ma2">
+    <div className="generateBGBtn pa2 ma2 dib">
       <Button
         variant="outlined"
         color="inherit"
