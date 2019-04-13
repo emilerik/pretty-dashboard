@@ -13,7 +13,7 @@ A dashboard which displays time, weather, a personal greeting and randomized wal
 
 The app display the current time, as well as an appropriate greeting. In the top left corner, the weather is displayed.
 
-To get the weather from a location other than the default (Linköping), press the settings icon in the top right corner (can be difficult to see in some backgrounds). Enter position with lat/long coordinates, 0-6 digits. You can also change the display name in the settings.
+To get the weather from a location other than the default (Linköping), press the settings icon in the top right corner (can be difficult to see in some backgrounds). Enter position with lat/long coordinates, 0-6 decimals. You can also change the display name in the settings.
 
 The background image is a randomized wallpaper from [Unsplash](https://unsplash.com/). Due to this, the image is sometimes too light for the text to be visible. You can generate a new background image by clicking button in the bottom right corner.
 
