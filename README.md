@@ -1,6 +1,7 @@
 # Pretty Dashboard!
 
 A dashboard which displays time, weather, a personal greeting and randomized wallpaper. Built in React.
+Uses the SMHI API to fetch weather data, and Unsplash to fetch random wallpaper.
 
 ## Installation
 
