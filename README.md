@@ -17,5 +17,4 @@ To get the weather from a location other than the default (Linköping), press th
 
 The background image is a randomized wallpaper from [Unsplash](https://unsplash.com/). Due to this, the image is sometimes too light for the text to be visible. You can generate a new background image by clicking button in the bottom right corner.
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![screenshot](./Screenshot.png?raw=true)
